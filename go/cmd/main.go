@@ -23,6 +23,7 @@ func main() {
 		Subject: pkix.Name{
 			CommonName: "Root CA",
 		},
+
 		NotBefore:             time.Now(),
 		NotAfter:              time.Now().AddDate(10, 0, 0),
 		KeyUsage:              x509.KeyUsageCertSign | x509.KeyUsageCRLSign,
@@ -39,10 +40,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
 	pem.Encode(rootCertFile, &pem.Block{
 		Type:  "CERTIFICATE",
 		Bytes: rootCertBytes,
 	})
+
 	rootCertFile.Close()
 
 	for _, cn := range os.Args[1:] {
@@ -70,20 +73,24 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
+
 		pem.Encode(certFile, &pem.Block{
 			Type:  "CERTIFICATE",
 			Bytes: certBytes,
 		})
+
 		certFile.Close()
 
 		keyFile, err := os.Create(cn + ".key")
 		if err != nil {
 			panic(err)
 		}
+
 		pem.Encode(keyFile, &pem.Block{
 			Type:  "RSA PRIVATE KEY",
 			Bytes: x509.MarshalPKCS1PrivateKey(key),
 		})
+
 		keyFile.Close()
 	}
 }
