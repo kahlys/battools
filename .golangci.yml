@@ -1,0 +1,37 @@
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - dogsled
+    - gci
+    - goconst
+    - gocritic
+    - goimports
+    - goprintffuncname
+    - gosimple
+    - govet
+    - ineffassign
+    - misspell
+    - nakedret
+    - revive
+    - staticcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - whitespace
+
+output:
+  sort-results: true
+
+linters-settings:
+  gci:
+    sections:
+      - standard
+      - default
+      - prefix(github.com/kahlys/battools)
+  goimports:
+    local-prefixes: github.com/kahlys/battools
+  goconst:
+    min-occurrences: 5
