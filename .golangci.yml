@@ -3,7 +3,6 @@ linters:
   enable:
     - bodyclose
     - dogsled
-    - gci
     - goconst
     - gocritic
     - goimports
@@ -26,11 +25,6 @@ output:
   sort-results: true
 
 linters-settings:
-  gci:
-    sections:
-      - standard
-      - default
-      - prefix(github.com/kahlys/battools)
   goimports:
     local-prefixes: github.com/kahlys/battools
   goconst:
