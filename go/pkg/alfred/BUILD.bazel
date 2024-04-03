@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "alfred",
+    srcs = [
+        "filter.go",
+        "sort.go",
+    ],
+    importpath = "github.com/kahlys/battools/go/pkg/alfred",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_lib_pq//:go_default_library"],
+)
+
+go_test(
+    name = "alfred_test",
+    srcs = [
+        "filter_test.go",
+        "sort_test.go",
+    ],
+    embed = [":alfred"],
+    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
+)

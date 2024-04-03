@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "osx",
+    srcs = ["osx.go"],
+    importpath = "github.com/kahlys/battools/go/cmd/oracle/internal/osx",
+    visibility = ["//go/cmd/oracle:__subpackages__"],
+)
