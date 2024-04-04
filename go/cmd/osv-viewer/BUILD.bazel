@@ -6,9 +6,9 @@ go_library(
     importpath = "github.com/kahlys/battools/go/cmd/osv-viewer",
     visibility = ["//visibility:private"],
     deps = [
-        "@com_github_jedib0t_go_pretty//table:go_default_library",
-        "@com_github_jedib0t_go_pretty//text:go_default_library",
-        "@com_github_spf13_cobra//:go_default_library",
+        "@com_github_jedib0t_go_pretty//table",
+        "@com_github_jedib0t_go_pretty//text",
+        "@com_github_spf13_cobra//:cobra",
     ],
 )
 
