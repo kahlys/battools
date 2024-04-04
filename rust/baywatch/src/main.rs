@@ -2,7 +2,7 @@
 extern crate prettytable;
 
 use bollard::Docker;
-use clap::{App, Arg};
+use clap::Parser;
 use futures::future::join_all;
 use prettytable::format;
 use prettytable::Table;
@@ -10,41 +10,27 @@ use std::fs::File;
 
 mod docker;
 
+#[derive(Parser, Debug)]
+#[command(version, about, long_about = None)]
+struct Args {
+    #[arg(short, long)]
+    image: String,
+
+    #[arg(short, long)]
+    output: Option<String>,
+}
+
 #[tokio::main]
 async fn main() {
-    let matches = App::new("Baywatch")
-        .arg(
-            Arg::with_name("docker-image")
-                .short("i")
-                .long("image")
-                .takes_value(true)
-                .help("Docker image")
-                .required(true),
-        )
-        .arg(
-            Arg::with_name("output")
-                .short("o")
-                .long("output")
-                .takes_value(true)
-                .help("Output CSV file"),
-        )
-        .get_matches();
+    let args = Args::parse();
 
-    let image = matches.value_of("docker-image").unwrap();
+    let image = args.image;
 
     let docker = Docker::connect_with_local_defaults().unwrap();
     let d_info = docker.info().await.unwrap();
     let host_ncpu = d_info.ncpu.unwrap();
     let host_memory = d_info.mem_total.unwrap();
 
-    println!(
-        "    __                               __       __
-   / /_  ____ ___  ___      ______ _/ /______/ /_
-  / __ \\/ __ `/ / / / | /| / / __ `/ __/ ___/ __ \\
- / /_/ / /_/ / /_/ /| |/ |/ / /_/ / /_/ /__/ / / /
-/_.___/\\__,_/\\__, / |__/|__/\\__,_/\\__/\\___/_/ /_/
-            /____/"
-    );
 
     println!("Docker infos");
     println!("host ncpu : {:?}", host_ncpu);
@@ -75,7 +61,7 @@ async fn main() {
     let res = join_all(
         (1..(host_ncpu + 1))
             .rev()
-            .map(|x| docker::run_container(&docker, image, x)),
+            .map(|x| docker::run_container(&docker, &image, x)),
     )
     .await;
 
@@ -84,7 +70,7 @@ async fn main() {
     }
     table.printstd();
 
-    if let Some(o) = matches.value_of("output") {
+    if let Some(o) = args.output {
         let file = File::create(o).unwrap();
         table.to_csv(file).unwrap();
     }
