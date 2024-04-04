@@ -5,6 +5,7 @@ go_library(
     srcs = [
         "aes.go",
         "win.go",
+        "win_no.go",
     ],
     importpath = "github.com/kahlys/battools/go/cmd/oracle/internal/cryptox",
     visibility = ["//go/cmd/oracle:__subpackages__"],
