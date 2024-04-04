@@ -6,5 +6,5 @@ personnal tools
 
 It uses bazel to build the project.
 
-- **go**: https://github.com/bazelbuild/rules_go/blob/master/docs/go/core/bzlmod.md
+- **go**: [Go with Bzlmod](https://github.com/bazelbuild/rules_go/blob/master/docs/go/core/bzlmod.md)
 - **rust**: TODO
