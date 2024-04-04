@@ -25,10 +25,10 @@ func (s *Store) AddHero(h Hero) {
 	autoIncrID++
 }
 
-func (s *Store) UpdateHero(id int, h Hero) {
+func (s *Store) UpdateHero(id int, hero Hero) {
 	for i, h := range s.heroes {
 		if h.ID == id {
-			s.heroes[i] = h
+			s.heroes[i] = hero
 			return
 		}
 	}

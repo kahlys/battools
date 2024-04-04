@@ -86,11 +86,7 @@ func main() {
 				return err
 			}
 
-			if err := json.Unmarshal(content, &results); err != nil {
-				return err
-			}
-
-			return nil
+			return json.Unmarshal(content, &results)
 		},
 	}
 
@@ -116,7 +112,7 @@ func main() {
 	}
 }
 
-func runSourcesCommand(cmd *cobra.Command, args []string) {
+func runSourcesCommand(_ *cobra.Command, _ []string) {
 	total := 0
 
 	t := newTable()
@@ -137,7 +133,7 @@ func runSourcesCommand(cmd *cobra.Command, args []string) {
 
 var rg = regexp.MustCompile(`(\r\n?|\n){2,}`)
 
-func runShowCommand(cmd *cobra.Command, args []string) error {
+func runShowCommand(_ *cobra.Command, args []string) error {
 	for _, r := range results.Results {
 		// find sources
 		if hash(r.Source.Path) != args[0] {

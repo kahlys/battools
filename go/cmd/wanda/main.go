@@ -233,9 +233,13 @@ func (s *{{ $title }}Server) {{ .Name }}(w http.ResponseWriter, r *http.Request)
 {{ end }}
 `
 
+const (
+	jsonNil = "nil"
+)
+
 func SchemaAsJSON(ident int, schema *openapi3.Schema) string {
 	if schema == nil {
-		return "nil"
+		return jsonNil
 	}
 	switch schema.Type {
 	case "object":
@@ -255,7 +259,7 @@ func SchemaAsJSON(ident int, schema *openapi3.Schema) string {
 
 func SchemaAsJSONObject(ident int, schema *openapi3.Schema) string {
 	if schema == nil {
-		return "nil"
+		return jsonNil
 	}
 	res := fmt.Sprintf("%vstruct {\n", strings.Repeat("  ", ident))
 	first := true
@@ -267,7 +271,6 @@ func SchemaAsJSONObject(ident int, schema *openapi3.Schema) string {
 		value := strings.TrimSpace(SchemaAsJSON(ident, schema.Value))
 		res += fmt.Sprintf("%v%v %v `json:\"%vomitempty\"`", strings.Repeat("  ", ident), cases.Title(language.English).String(name), value, name)
 		first = false
-
 	}
 	res += fmt.Sprintf("\n%v}", strings.Repeat("  ", ident-1))
 	return res
@@ -275,7 +278,7 @@ func SchemaAsJSONObject(ident int, schema *openapi3.Schema) string {
 
 func SchemaAsJSONArray(ident int, schema *openapi3.Schema) string {
 	if schema == nil {
-		return "nil"
+		return jsonNil
 	}
 	// schema.Items.Value.Type to get which type is in array
 	return "[\n" +
@@ -285,21 +288,21 @@ func SchemaAsJSONArray(ident int, schema *openapi3.Schema) string {
 
 func SchemaAsJSONString(ident int, schema *openapi3.Schema) string {
 	if schema == nil {
-		return "nil"
+		return jsonNil
 	}
 	return fmt.Sprintf(`%vstring`, strings.Repeat("  ", ident))
 }
 
 func SchemaAsJSONInt(ident int, schema *openapi3.Schema) string {
 	if schema == nil {
-		return "nil"
+		return jsonNil
 	}
 	return fmt.Sprintf(`%vint`, strings.Repeat("  ", ident))
 }
 
 func SchemaAsJSONBool(ident int, schema *openapi3.Schema) string {
 	if schema == nil {
-		return "nil"
+		return jsonNil
 	}
 	return fmt.Sprintf(`%vbool`, strings.Repeat("  ", ident))
 }
