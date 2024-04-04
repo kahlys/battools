@@ -1,7 +1,3 @@
-run:
-  skip-dirs:
-    - go/cmd/oracle # skip because of windows syscall
-
 linters:
   disable-all: true
   enable:
