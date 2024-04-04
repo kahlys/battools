@@ -7,10 +7,10 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bollard = "0.10.1"
-chrono = "0.4"
-clap = "2.33.3"
-futures = "0.3.14"
-futures-util = "0.3"
-prettytable-rs = "^0.8"
-tokio = { version = "1.5.0", features = ["full"] }
+bollard = "0.16.1"
+chrono = "0.4.37"
+clap = { version = "4.5.4", features = ["derive"] }
+futures = "0.3.30"
+futures-util = "0.3.30"
+prettytable-rs = "0.10.0"
+tokio = { version = "1.37.0", features = ["full"] }
