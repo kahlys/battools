@@ -34,7 +34,7 @@ func main() {
 		Title: doc.Info.Title,
 	}
 	methods := []string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS", "TRACE"}
-	for path, item := range doc.Paths {
+	for path, item := range doc.Paths.Map() {
 		for _, method := range methods {
 			if op := item.GetOperation(method); op != nil {
 				if op.OperationID == "" {
