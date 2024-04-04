@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 6,
-  "moduleFileHash": "22c3c1a607672cabb381ce9d54961f81915d5f283fa23328ebac6fef82d2088a",
+  "moduleFileHash": "50ba2058ee0f35170032eed2b87b1d49eeef01a733ce7cffdd0006bd13b5c0c5",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -72,9 +72,14 @@
             "column": 24
           },
           "imports": {
+            "com_github_getkin_kin_openapi": "com_github_getkin_kin_openapi",
+            "com_github_google_osv_scanner": "com_github_google_osv_scanner",
+            "com_github_jedib0t_go_pretty": "com_github_jedib0t_go_pretty",
             "com_github_lib_pq": "com_github_lib_pq",
             "com_github_mattn_go_sqlite3": "com_github_mattn_go_sqlite3",
-            "com_github_stretchr_testify": "com_github_stretchr_testify"
+            "com_github_spf13_cobra": "com_github_spf13_cobra",
+            "com_github_stretchr_testify": "com_github_stretchr_testify",
+            "org_golang_x_text": "org_golang_x_text"
           },
           "devImports": [],
           "tags": [
