@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("@rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "alfred",
@@ -8,7 +8,7 @@ go_library(
     ],
     importpath = "github.com/kahlys/battools/go/pkg/alfred",
     visibility = ["//visibility:public"],
-    deps = ["@com_github_lib_pq//:go_default_library"],
+    deps = ["@com_github_lib_pq//:pq"],
 )
 
 go_test(
@@ -18,5 +18,5 @@ go_test(
         "sort_test.go",
     ],
     embed = [":alfred"],
-    deps = ["@com_github_stretchr_testify//assert:go_default_library"],
+    deps = ["@com_github_stretchr_testify//assert"],
 )
