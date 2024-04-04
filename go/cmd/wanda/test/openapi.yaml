@@ -1,0 +1,120 @@
+openapi: 3.0.1
+info:
+  title: Superhero
+  version: 1.0.0
+
+tags:
+- name: hero
+  description: Everything about your Heroes
+
+paths:
+  /heroes:
+    get:
+      tags:
+        - hero
+      summary: Get all heroes
+      operationId: getHeroes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hero'
+        default:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - hero
+      summary: Create a new hero
+      operationId: createHero
+      requestBody:
+        description: Hero to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hero'
+      responses:
+        '200':
+          description: Created
+        default:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /heroes/{id}:
+    put:
+      tags:
+        - hero
+      summary: Update a hero
+      operationId: updateHero
+      parameters:
+        - name: id
+          in: path
+          description: ID of hero to update
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: query
+          description: Hero to update
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - hero
+      summary: Delete a hero
+      operationId: deleteHero
+      parameters:
+        - name: id
+          in: path
+          description: ID of hero to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Hero:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
