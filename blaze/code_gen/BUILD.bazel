@@ -1,3 +1,5 @@
+load("//blaze/code_gen:generator.bzl", "hello_generator")
+
 genrule(
     name = "genworld",
     outs = ["hello_world.go"],
@@ -10,4 +12,19 @@ genrule(
     outs = ["hello_bruce.go"],
     cmd = "$(location //blaze/code_gen/generator:generator) -name bruce > $@",
     tools = ["//blaze/code_gen/generator"],
+)
+
+hello_generator(
+    name = "genmacrolion",
+    arg = "lion",
+)
+
+hello_generator(
+    name = "genmacrocat",
+    arg = "cat",
+)
+
+hello_generator(
+    name = "genmacrodog",
+    arg = "dog",
 )
