@@ -38,3 +38,8 @@ chained_generator(
         "green",
     ],
 )
+
+mygenrule(
+    name = "gensea",
+    param = "sea",
+)
