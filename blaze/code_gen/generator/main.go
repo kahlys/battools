@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"go/format"
+	"io"
 	"os"
 	"text/template"
 )
@@ -36,14 +37,34 @@ func generate(value string) (string, error) {
 
 func main() {
 	var value = flag.String("name", "world", "name used in the generated hello package")
+	var out = flag.String("out", "", "output file name")
 
 	flag.Parse()
 
 	s, err := generate(*value)
 	if err != nil {
+		check(err)
+	}
+
+	var wr io.Writer = os.Stdout
+	if *out != "" {
+		f, err := os.Create(*out)
+		if err != nil {
+			check(err)
+		}
+		defer f.Close()
+		wr = f
+	}
+
+	_, err = fmt.Fprint(wr, s)
+	if err != nil {
+		check(err)
+	}
+}
+
+func check(err error) {
+	if err != nil {
 		fmt.Println("Error:", err)
 		os.Exit(1)
 	}
-
-	fmt.Println(s)
 }
