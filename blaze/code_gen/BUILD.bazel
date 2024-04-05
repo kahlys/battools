@@ -1,0 +1,13 @@
+genrule(
+    name = "genworld",
+    outs = ["hello_world.go"],
+    cmd = "$(location //blaze/code_gen/generator:generator) -name hello > $@",
+    tools = ["//blaze/code_gen/generator"],
+)
+
+genrule(
+    name = "genbruce",
+    outs = ["hello_bruce.go"],
+    cmd = "$(location //blaze/code_gen/generator:generator) -name bruce > $@",
+    tools = ["//blaze/code_gen/generator"],
+)
