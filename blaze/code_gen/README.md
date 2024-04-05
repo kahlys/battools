@@ -41,6 +41,12 @@ genrule(
 )
 ```
 
+Use the following command to generate the code:
+
+```sh
+bazel build //blaze/code_gen:genworld
+```
+
 ## macros
 
 To simplify the use of the genrule, a macro can be defined.
@@ -68,4 +74,10 @@ hello_generator(
     name = "genmacrolion",
     arg = "lion",
 )
+```
+
+Use the following command to generate the code:
+
+```sh
+bazel build //blaze/code_gen:genmacrolion
 ```
