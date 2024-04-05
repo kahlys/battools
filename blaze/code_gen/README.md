@@ -81,3 +81,45 @@ Use the following command to generate the code:
 ```sh
 bazel build //blaze/code_gen:genmacrolion
 ```
+
+## chained macros
+
+To chain macros, the following can be done:
+
+In the generator.bzl file:
+
+```python
+def chained_generator(name, args, visibility = None):
+    for arg in args:
+        native.genrule(
+            name = name + arg,
+            outs = ["hello_" + arg + ".go"],
+            cmd = "$(location //blaze/code_gen/generator:generator) -name %s > $@" % arg,
+            tools = ["//blaze/code_gen/generator"],
+            visibility = visibility,
+        )
+```
+
+In the BUILD.bazel file:
+
+```python
+# import chained_generator macro from generator.bzl
+load("//blaze/code_gen:generator.bzl", "chained_generator")
+
+chained_generator(
+    name = "genchain",
+    args = [
+        "red",
+        "blue",
+        "green",
+    ],
+)
+```
+
+Use the following command to generate the code:
+
+```sh
+bazel build //blaze/code_gen:genchainred
+bazel build //blaze/code_gen:genchainblue
+bazel build //blaze/code_gen:genchaingreen
+```

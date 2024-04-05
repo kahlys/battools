@@ -1,4 +1,4 @@
-load("//blaze/code_gen:generator.bzl", "hello_generator")
+load("//blaze/code_gen:generator.bzl", "chained_generator", "hello_generator")
 
 genrule(
     name = "genworld",
@@ -27,4 +27,13 @@ hello_generator(
 hello_generator(
     name = "genmacrodog",
     arg = "dog",
+)
+
+chained_generator(
+    name = "genchain",
+    args = [
+        "red",
+        "blue",
+        "green",
+    ],
 )
