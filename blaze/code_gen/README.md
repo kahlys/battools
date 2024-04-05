@@ -2,6 +2,10 @@
 
 Playground to test code generation with Bazel.
 
+- genrule: _[documentation](https://bazel.build/reference/be/general#genrule)_
+- macro creation: _[documentation](https://bazel.build/extending/macros)_
+- rule creation: _[documentation](https://bazel.build/extending/rules)_
+
 The generator is a simple code generator that generates a GO package with a single hello function.
 A basic BUILD.bazel file is provided to build the code generator.
 
