@@ -1,10 +1,11 @@
+load("@rules_go//go:def.bzl", "go_library")
 load("//blaze/code_gen:generator.bzl", "chained_generator", "hello_generator")
 load("//blaze/code_gen:generator_rule.bzl", "mygenrule")
 
 genrule(
     name = "genworld",
     outs = ["hello_world.go"],
-    cmd = "$(location //blaze/code_gen/generator:generator) -name hello -out $@",
+    cmd = "$(location //blaze/code_gen/generator:generator) -name world -out $@",
     tools = ["//blaze/code_gen/generator"],
 )
 
@@ -42,4 +43,18 @@ chained_generator(
 mygenrule(
     name = "gensea",
     param = "sea",
+)
+
+go_library(
+    name = "go_hello",
+    srcs = [":genworld"],
+    importpath = "github.com/kahlys/battools/blaze/hello",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "go_hello_sea",
+    srcs = [":gensea"],
+    importpath = "github.com/kahlys/battools/blaze/hello",
+    visibility = ["//visibility:public"],
 )
