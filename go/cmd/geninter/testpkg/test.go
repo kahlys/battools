@@ -42,6 +42,6 @@ func (u *User) SetInfo(name string, age int) {
 	u.age = age
 }
 
-func (u *User) IsAdult(ctx context.Context) bool {
+func (u *User) IsAdult(_ context.Context) bool {
 	return u.age >= 18
 }
