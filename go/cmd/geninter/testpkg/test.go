@@ -3,8 +3,9 @@ package testpkg
 import "context"
 
 type User struct {
-	name string
-	age  int
+	name    string
+	surname string
+	age     int
 }
 
 func (u *User) Name() string {
@@ -13,6 +14,15 @@ func (u *User) Name() string {
 
 func (u *User) SetName(name string) {
 	u.name = name
+}
+
+func (u *User) SetNames(name, surname string) {
+	u.name = name
+	u.surname = surname
+}
+
+func (u *User) Names() (name, surname string) {
+	return u.name, u.surname
 }
 
 func (u *User) Age() int {

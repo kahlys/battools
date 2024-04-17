@@ -22,29 +22,37 @@ func main() {
 	check(*packagePath == "", "Package path is required")
 	check(*structName == "", "Struct name is required")
 
+	res, err := run(*packagePath, *structName)
+	checkErr(err, "Error running")
+
+	fmt.Println(res)
+}
+
+func run(pkgPath string, structName string) (string, error) {
 	pkgs, err := parser.ParseDir(
 		token.NewFileSet(),
-		*packagePath,
+		pkgPath,
 		func(info os.FileInfo) bool {
 			return !strings.HasSuffix(info.Name(), "_test.go")
 		},
 		parser.ParseComments,
 	)
-	checkErr(err, "Failed to parse package")
-	check(len(pkgs) == 0, "No packages found")
-	check(len(pkgs) > 1, "Multiple packages found")
+	if err != nil {
+		return "", err
+	}
+	if len(pkgs) == 0 {
+		return "", fmt.Errorf("no packages found")
+	}
+	if len(pkgs) > 1 {
+		return "", fmt.Errorf("multiple packages found")
+	}
 
 	methods := []string{}
 	for _, file := range firstPackage(pkgs).Files {
-		methods = append(methods, getMethods(*structName, file)...)
+		methods = append(methods, getMethods(structName, file)...)
 	}
 
-	res, err := generate(*structName, methods)
-	if err != nil {
-		checkErr(err, "Failed to generate interface")
-	}
-
-	fmt.Println(res)
+	return generate(structName, methods)
 }
 
 func getMethods(structName string, file *ast.File) []string {
@@ -67,22 +75,12 @@ func getMethods(structName string, file *ast.File) []string {
 				continue
 			}
 			if ident.Name == structName {
-				params := make([]string, len(funcDecl.Type.Params.List))
-				for i, param := range funcDecl.Type.Params.List {
-					params[i] = fmt.Sprintf("%s %s", param.Names[0].Name, typeExprToString(param.Type))
-
-				}
-
-				results := []string{}
-				if funcDecl.Type.Results != nil {
-					results = make([]string, len(funcDecl.Type.Results.List))
-					for i, result := range funcDecl.Type.Results.List {
-						results[i] = typeExprToString(result.Type)
-
-					}
-				}
-
-				method := fmt.Sprintf("%s(%s) (%s)", funcDecl.Name.Name, strings.Join(params, ", "), strings.Join(results, ", "))
+				method := fmt.Sprintf(
+					"%s(%s) (%s)",
+					funcDecl.Name.Name,
+					fieldsToString(funcDecl.Type.Params),
+					fieldsToString(funcDecl.Type.Results),
+				)
 				methods = append(methods, method)
 			}
 		}
@@ -108,6 +106,28 @@ func generate(structName string, methods []string) (string, error) {
 	}
 
 	return string(pretty), nil
+}
+
+func fieldsToString(fieldList *ast.FieldList) string {
+	if fieldList == nil {
+		return ""
+	}
+
+	strs := []string{}
+	for _, field := range fieldList.List {
+		if field.Type == nil {
+			continue
+		}
+		fieldType := typeExprToString(field.Type)
+		if len(field.Names) > 0 {
+			for _, name := range field.Names {
+				strs = append(strs, fmt.Sprintf("%s %s", name, fieldType))
+			}
+		} else {
+			strs = append(strs, fieldType)
+		}
+	}
+	return strings.Join(strs, ", ")
 }
 
 func typeExprToString(expr ast.Expr) string {
