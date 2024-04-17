@@ -1,0 +1,16 @@
+load("@rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "testpkg",
+    srcs = [
+        "test.go",
+        "test2.go",
+    ],
+    importpath = "github.com/kahlys/battools/go/cmd/geninter/testpkg",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "testpkg_test",
+    srcs = ["test_test.go"],
+)
