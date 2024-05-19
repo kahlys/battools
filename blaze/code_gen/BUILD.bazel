@@ -58,3 +58,11 @@ go_library(
     importpath = "github.com/kahlys/battools/blaze/hello",
     visibility = ["//visibility:public"],
 )
+
+# gazelle:exclude hello_bruce.go
+go_library(
+    name = "code_gen",
+    srcs = ["hello_world.go"],
+    importpath = "github.com/kahlys/battools/blaze/code_gen",
+    visibility = ["//visibility:public"],
+)
