@@ -1,3 +1,8 @@
 load("@gazelle//:def.bzl", "gazelle")
 
-gazelle(name = "gazelle")
+# gazelle:resolve go github.com/kahlys/battools/blaze/hello //blaze/code_gen:go_hello
+
+gazelle(
+    name = "gazelle",
+    mode = "fix",
+)
