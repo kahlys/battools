@@ -9,6 +9,26 @@ It uses bazel to build the project.
 - **go**: [Go with Bzlmod](https://github.com/bazelbuild/rules_go/blob/master/docs/go/core/bzlmod.md)
 - **rust**: TODO
 
+## Bazel tips
+
+### Missing generated go import path and dependencies
+
+When running bazel commands like `bazel run @rules_go//go -- mod tidy`, you may encounter an error if generated code is not yet generated. A workaround if to write a script that generates empty files in the expected directories.
+
+```bash
+#!/bin/bash
+set -e
+
+
+mkdir -p blaze/hello
+echo 'package hello' > blaze/hello/hello.go
+
+bazel run @rules_go//go -- mod tidy
+bazel mod tidy
+
+rm -rf blaze/hello
+```
+
 ## Gazelle tips
 
 ### Multiple rules
