@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/kahlys/battools/blaze/hello"
+	"github.com/kahlys/battools/blaze/code_gen/gen/hello"
 )
 
 func main() {
