@@ -4,10 +4,66 @@ personnal tools
 
 ## Build
 
-It uses bazel to build the project.
+It uses bazel to build the project. To find bazel modules, visit [the registry](https://registry.bazel.build/)
 
-- **go**: [Go with Bzlmod](https://github.com/bazelbuild/rules_go/blob/master/docs/go/core/bzlmod.md)
-- **rust**: TODO
+### Golang
+
+_[Go with Bzlmod](https://github.com/bazelbuild/rules_go/blob/master/docs/go/core/bzlmod.md)_
+
+### Rustlang
+
+At the root of the project, create a `Cargo.toml` file with the following content:
+
+```toml
+[workspace]
+
+members = [
+    "path/to/project",
+    "path/to/other_project",
+]
+```
+
+In your `MODULE.bazel` file, add the following lines:
+
+```starlark
+bazel_dep(name = "rules_rust", version = "0.45.1")
+
+
+rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+rust.toolchain(
+    edition = "2021",
+    versions = ["1.78.0"],
+)
+use_repo(rust, "rust_toolchains")
+
+register_toolchains("@rust_toolchains//:all")
+
+crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
+crate.from_cargo(
+    name = "crates",
+    cargo_lockfile = "//:Cargo.lock",
+    manifests = [
+        "//:Cargo.toml",
+        "//path/to/project:Cargo.toml",
+        "//path/to/other_project:Cargo.toml",
+    ],
+)
+use_repo(crate, "crates")
+```
+
+And in a project's `BUILD.bazel` file (at the same level of the project Cargo.toml file), add the following lines:
+
+```starlark
+load("@crates//:defs.bzl", "aliases", "all_crate_deps")
+load("@rules_rust//rust:defs.bzl", "rust_binary")
+
+rust_binary(
+    name = "project_name",
+    srcs = ["src/main.rs"],
+    crate_name = "project_name",
+    deps = all_crate_deps(),
+)
+```
 
 ## Bazel tips
 
