@@ -1,6 +1,7 @@
 bazel_dep(name = "aspect_bazel_lib", version = "2.7.3")
 bazel_dep(name = "gazelle", version = "0.36.0")
 bazel_dep(name = "rules_go", version = "0.46.0")
+bazel_dep(name = "rules_rust", version = "0.45.1")
 
 go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
 go_sdk.download(version = "1.22.2")
@@ -18,3 +19,24 @@ use_repo(
     "com_github_stretchr_testify",
     "org_golang_x_text",
 )
+
+rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+rust.toolchain(
+    edition = "2021",
+    versions = ["1.78.0"],
+)
+use_repo(rust, "rust_toolchains")
+
+register_toolchains("@rust_toolchains//:all")
+
+crate = use_extension("@rules_rust//crate_universe:extension.bzl", "crate")
+crate.from_cargo(
+    name = "crates",
+    cargo_lockfile = "//:Cargo.lock",
+    manifests = [
+        "//:Cargo.toml",
+        "//rust/baywatch:Cargo.toml",
+        "//rust/lifegame:Cargo.toml",
+    ],
+)
+use_repo(crate, "crates")
