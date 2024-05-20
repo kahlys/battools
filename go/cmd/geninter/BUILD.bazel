@@ -16,6 +16,12 @@ go_binary(
 go_test(
     name = "geninter_test",
     srcs = ["main_test.go"],
+    data = [
+        "//go/cmd/geninter/testpkg:expected",
+        "//go/cmd/geninter/testpkg:test.go",
+        "//go/cmd/geninter/testpkg:test2.go",
+        "//go/cmd/geninter/testpkg:test_test.go",
+    ],
     embed = [":geninter_lib"],
     deps = ["@com_github_stretchr_testify//require"],
 )

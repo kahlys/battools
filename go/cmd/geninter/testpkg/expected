@@ -1,7 +1,7 @@
 type User interface {
 	Age() int
 	Info() (name string, age int)
-	IsAdult(ctx context.Context) bool
+	IsAdult(_ context.Context) bool
 	Name() string
 	Names() (name string, surname string)
 	Says(str string) string
