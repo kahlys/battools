@@ -94,11 +94,11 @@ When you run `bazel run //:gazelle`, if you encounter an error about multiple ru
 Take the following example:
 
 ```bash
-gazelle: rule //blaze/code_gen/cmd:cmd_lib imports "github.com/kahlys/battools/blaze/hello" which matches multiple rules: //blaze/code_gen:go_hello and //blaze/code_gen:go_hello_sea. # gazelle:resolve may be used to disambiguate
+gazelle: rule //blaze/codegen/cmd:cmd_lib imports "github.com/kahlys/battools/blaze/hello" which matches multiple rules: //blaze/codegen:go_hello and //blaze/codegen:go_hello_sea. # gazelle:resolve may be used to disambiguate
 ```
 
 In the root BUILD.bazel file, add the following line to resolve the go dependencies.
 
 ```starlark
-# gazelle:resolve go github.com/kahlys/battools/blaze/hello //blaze/code_gen:go_hello
+# gazelle:resolve go github.com/kahlys/battools/blaze/hello //blaze/codegen:go_hello
 ```

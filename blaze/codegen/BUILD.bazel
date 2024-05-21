@@ -1,12 +1,12 @@
 load("@rules_go//go:def.bzl", "go_library")
-load("//blaze/code_gen:generator.bzl", "chained_generator", "hello_generator")
-load("//blaze/code_gen:generator_rule.bzl", "mygenrule")
+load("//blaze/codegen:generator.bzl", "chained_generator", "hello_generator")
+load("//blaze/codegen:generator_rule.bzl", "mygenrule")
 
 genrule(
     name = "genworld",
     outs = ["hello_world.go"],
-    cmd = "$(location //blaze/code_gen/generator:generator) -name world -out $@",
-    tools = ["//blaze/code_gen/generator"],
+    cmd = "$(location //blaze/codegen/generator:generator) -name world -out $@",
+    tools = ["//blaze/codegen/generator"],
     visibility = [
         "//visibility:public",
     ],
@@ -15,8 +15,8 @@ genrule(
 genrule(
     name = "genbruce",
     outs = ["hello_bruce.go"],
-    cmd = "$(location //blaze/code_gen/generator:generator) -name bruce > $@",
-    tools = ["//blaze/code_gen/generator"],
+    cmd = "$(location //blaze/codegen/generator:generator) -name bruce > $@",
+    tools = ["//blaze/codegen/generator"],
 )
 
 hello_generator(
@@ -51,21 +51,21 @@ mygenrule(
 go_library(
     name = "go_hello",
     srcs = [":genworld"],
-    importpath = "github.com/kahlys/battools/blaze/code_gen/gen/hello",
+    importpath = "github.com/kahlys/battools/blaze/codegen/gen/hello",
     visibility = ["//visibility:public"],
 )
 
 go_library(
     name = "go_hello_sea",
     srcs = [":gensea"],
-    importpath = "github.com/kahlys/battools/blaze/code_gen/gen/hello",
+    importpath = "github.com/kahlys/battools/blaze/codegen/gen/hello",
     visibility = ["//visibility:public"],
 )
 
 # gazelle:exclude hello_bruce.go
 go_library(
-    name = "code_gen",
+    name = "codegen",
     srcs = ["hello_world.go"],
-    importpath = "github.com/kahlys/battools/blaze/code_gen/gen/hello",
+    importpath = "github.com/kahlys/battools/blaze/codegen/gen/hello",
     visibility = ["//visibility:public"],
 )

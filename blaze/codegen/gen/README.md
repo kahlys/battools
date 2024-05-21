@@ -20,9 +20,9 @@ load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
 write_source_files(
     name = "write_gen_hello",
     files = {
-        "hello.go": "//blaze/code_gen:genworld",
+        "hello.go": "//blaze/codegen:genworld",
     },
 )
 ```
 
-It will generate the `hello.go` file in the same directory where the `BUILD.bazel` file is located, by running the `genworld` rule from the `blaze/code_gen` directory.
+It will generate the `hello.go` file in the same directory where the `BUILD.bazel` file is located, by running the `genworld` rule from the `blaze/codegen` directory.

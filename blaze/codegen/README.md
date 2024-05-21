@@ -13,15 +13,15 @@ A basic BUILD.bazel file is provided to build the code generator.
 load("@rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_library(
-    name = "code_gen_lib",
+    name = "codegen_lib",
     srcs = ["main.go"],
-    importpath = "github.com/kahlys/battools/blaze/code_gen",
+    importpath = "github.com/kahlys/battools/blaze/codegen",
     visibility = ["//visibility:private"],
 )
 
 go_binary(
-    name = "code_gen",
-    embed = [":code_gen_lib"],
+    name = "codegen",
+    embed = [":codegen_lib"],
     visibility = ["//visibility:public"],
 )
 ```
@@ -29,7 +29,7 @@ go_binary(
 It can be used as follows:
 
 ```sh
-bazel run //blaze/code_gen/generator:generator -- -name bruce
+bazel run //blaze/codegen/generator:generator -- -name bruce
 ```
 
 ## genrule
@@ -40,15 +40,15 @@ Using genrules to generate the code. Add the following to the BUILD.bazel file.
 genrule(
     name = "genworld",
     outs = ["hello_world.go"],
-    cmd = "$(location //blaze/code_gen/generator:generator) -name hello > $@",
-    tools = ["//blaze/code_gen/generator"],
+    cmd = "$(location //blaze/codegen/generator:generator) -name hello > $@",
+    tools = ["//blaze/codegen/generator"],
 )
 ```
 
 Use the following command to generate the code:
 
 ```sh
-bazel build //blaze/code_gen:genworld
+bazel build //blaze/codegen:genworld
 ```
 
 ## macros
@@ -62,8 +62,8 @@ def hello_generator(name, arg, visibility=None):
   native.genrule(
     name = name,
     outs = ["hello_" + arg + ".go"],
-    cmd = "$(location //blaze/code_gen/generator:generator) -name %s > $@" % arg,
-    tools = ["//blaze/code_gen/generator"],
+    cmd = "$(location //blaze/codegen/generator:generator) -name %s > $@" % arg,
+    tools = ["//blaze/codegen/generator"],
     visibility = visibility,
   )
 ```
@@ -72,7 +72,7 @@ In the BUILD.bazel file:
 
 ```python
 # import hello_generator macro from generator.bzl
-load("//blaze/code_gen/generator:generator.bzl", "hello_generator")
+load("//blaze/codegen/generator:generator.bzl", "hello_generator")
 
 hello_generator(
     name = "genmacrolion",
@@ -83,7 +83,7 @@ hello_generator(
 Use the following command to generate the code:
 
 ```sh
-bazel build //blaze/code_gen:genmacrolion
+bazel build //blaze/codegen:genmacrolion
 ```
 
 ## chained macros
@@ -98,8 +98,8 @@ def chained_generator(name, args, visibility = None):
         native.genrule(
             name = name + arg,
             outs = ["hello_" + arg + ".go"],
-            cmd = "$(location //blaze/code_gen/generator:generator) -name %s > $@" % arg,
-            tools = ["//blaze/code_gen/generator"],
+            cmd = "$(location //blaze/codegen/generator:generator) -name %s > $@" % arg,
+            tools = ["//blaze/codegen/generator"],
             visibility = visibility,
         )
 ```
@@ -108,7 +108,7 @@ In the BUILD.bazel file:
 
 ```python
 # import chained_generator macro from generator.bzl
-load("//blaze/code_gen:generator.bzl", "chained_generator")
+load("//blaze/codegen:generator.bzl", "chained_generator")
 
 chained_generator(
     name = "genchain",
@@ -123,9 +123,9 @@ chained_generator(
 Use the following command to generate the code:
 
 ```sh
-bazel build //blaze/code_gen:genchainred
-bazel build //blaze/code_gen:genchainblue
-bazel build //blaze/code_gen:genchaingreen
+bazel build //blaze/codegen:genchainred
+bazel build //blaze/codegen:genchainblue
+bazel build //blaze/codegen:genchaingreen
 ```
 
 ## custom rule
@@ -145,7 +145,7 @@ mygenrule = rule(
         "_generator": attr.label(
             executable = True,
             cfg = "exec",
-            default = "//blaze/code_gen/generator:generator",
+            default = "//blaze/codegen/generator:generator",
         ),
     },
 )
@@ -218,10 +218,10 @@ In the BUILD.bazel file of the `cmd` directory, add _deps_ to the go_library rul
 go_library(
     name = "cmd_lib",
     srcs = ["main.go"],
-    importpath = "github.com/kahlys/battools/blaze/code_gen/cmd",
+    importpath = "github.com/kahlys/battools/blaze/codegen/cmd",
     visibility = ["//visibility:private"],
     deps = [
-        "//blaze/code_gen:go_hello",  # keep
+        "//blaze/codegen:go_hello",  # keep
     ],
 )
 
@@ -237,5 +237,5 @@ Add a `#keep` comment so future run of Gazelle will preserve the manually added 
 Test the code with the following command:
 
 ```sh
-bazel run //blaze/code_gen/cmd
+bazel run //blaze/codegen/cmd
 ```

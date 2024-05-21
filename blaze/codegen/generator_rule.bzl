@@ -32,7 +32,7 @@ mygenrule = rule(
         "_generator": attr.label(
             executable = True,
             cfg = "exec",
-            default = "//blaze/code_gen/generator:generator",
+            default = "//blaze/codegen/generator:generator",
         ),
     },
 )
