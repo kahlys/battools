@@ -1,3 +1,4 @@
+load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
 load("@rules_go//go:def.bzl", "go_library")
 load("//blaze/codegen:generator.bzl", "chained_generator", "hello_generator")
 load("//blaze/codegen:generator_rule.bzl", "mygenrule")
@@ -51,14 +52,14 @@ mygenrule(
 go_library(
     name = "go_hello",
     srcs = [":genworld"],
-    importpath = "github.com/kahlys/battools/blaze/codegen/gen/hello",
+    importpath = "github.com/kahlys/battools/blaze/codegen",
     visibility = ["//visibility:public"],
 )
 
 go_library(
     name = "go_hello_sea",
     srcs = [":gensea"],
-    importpath = "github.com/kahlys/battools/blaze/codegen/gen/hello",
+    importpath = "github.com/kahlys/battools/blaze/codegen",
     visibility = ["//visibility:public"],
 )
 
@@ -66,6 +67,13 @@ go_library(
 go_library(
     name = "codegen",
     srcs = ["hello_world.go"],
-    importpath = "github.com/kahlys/battools/blaze/codegen/gen/hello",
+    importpath = "github.com/kahlys/battools/blaze/codegen",
     visibility = ["//visibility:public"],
+)
+
+write_source_files(
+    name = "write_gen_hello",
+    files = {
+        "hello.go": "//blaze/codegen:genworld",
+    },
 )

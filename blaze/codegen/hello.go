@@ -1,4 +1,4 @@
-package hello
+package codegen
 
 import "fmt"
 

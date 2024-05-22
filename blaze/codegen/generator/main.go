@@ -14,7 +14,7 @@ func generate(value string) (string, error) {
 	var buf bytes.Buffer
 
 	var templ = template.Must(template.New("gen").Parse(`
-		package hello
+		package codegen
 
 		import "fmt"
 
