@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 6,
-  "moduleFileHash": "54c5ba193025156d165dcd40ff1a170c10a66ee3d60a7e2db790b12108d0ecec",
+  "moduleFileHash": "88f535f1d7fbf30681780fe609f562ed893b64508d93b2c79e3b01b4c630c931",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -71,6 +71,7 @@
             "com_github_mattn_go_sqlite3": "com_github_mattn_go_sqlite3",
             "com_github_spf13_cobra": "com_github_spf13_cobra",
             "com_github_stretchr_testify": "com_github_stretchr_testify",
+            "com_github_tidwall_gjson": "com_github_tidwall_gjson",
             "org_golang_x_text": "org_golang_x_text"
           },
           "devImports": [],
@@ -97,7 +98,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 23,
+            "line": 24,
             "column": 21
           },
           "imports": {
@@ -116,7 +117,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 24,
+                "line": 25,
                 "column": 15
               }
             }
@@ -130,7 +131,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 32,
+            "line": 33,
             "column": 22
           },
           "imports": {
@@ -152,7 +153,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 33,
+                "line": 34,
                 "column": 17
               }
             }
