@@ -1,0 +1,39 @@
+load("@rules_go//go:def.bzl", "go_library")
+load("@rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name = "build_event_stream_proto",
+    srcs = ["build_event_stream.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//proto/blaze:blaze_proto",
+        "//proto/command_line:command_line_proto",
+        "//proto/devtools/build/lib/packages/metrics:devtools_build_lib_packages_metrics_proto",
+        "//proto/failure_details:failure_details_proto",
+        "@com_google_protobuf//:any_proto",
+        "@com_google_protobuf//:duration_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
+)
+
+go_proto_library(
+    name = "build_event_stream_go_proto",
+    importpath = "github.com/kahlys/battools/proto/build_event_stream",
+    proto = ":build_event_stream_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//proto/blaze",
+        "//proto/blaze:invocation_policy_proto",
+        "//proto/command_line",
+        "//proto/devtools/build/lib/packages/metrics",
+        "//proto/failure_details",
+    ],
+)
+
+go_library(
+    name = "build_event_stream",
+    embed = [":build_event_stream_go_proto"],
+    importpath = "github.com/kahlys/battools/proto/build_event_stream",
+    visibility = ["//visibility:public"],
+)
