@@ -1,28 +1,19 @@
+output:
+  sort-results: true
+
 linters:
   disable-all: true
   enable:
-    - bodyclose
-    - dogsled
     - goconst
-    - gocritic
+    - gofumpt
     - goimports
-    - goprintffuncname
     - gosimple
     - govet
     - ineffassign
     - misspell
-    - nakedret
-    - revive
     - staticcheck
-    - stylecheck
-    - typecheck
-    - unconvert
-    - unparam
     - unused
-    - whitespace
-
-output:
-  sort-results: true
+    - revive
 
 linters-settings:
   goimports:
