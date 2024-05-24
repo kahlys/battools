@@ -13,7 +13,7 @@ import (
 func generate(value string) (string, error) {
 	var buf bytes.Buffer
 
-	var templ = template.Must(template.New("gen").Parse(`
+	templ := template.Must(template.New("gen").Parse(`
 		package codegen
 
 		import "fmt"
@@ -36,8 +36,8 @@ func generate(value string) (string, error) {
 }
 
 func main() {
-	var value = flag.String("name", "world", "name used in the generated hello package")
-	var out = flag.String("out", "", "output file name")
+	value := flag.String("name", "world", "name used in the generated hello package")
+	out := flag.String("out", "", "output file name")
 
 	flag.Parse()
 

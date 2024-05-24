@@ -29,7 +29,7 @@ func main() {
 
 func writeCredentialsCSV(credentials []webstealer.Credential, csvFilename string) error {
 	dir := filepath.Dir(csvFilename)
-	err := os.MkdirAll(dir, 0755)
+	err := os.MkdirAll(dir, 0o755)
 	if err != nil {
 		return err
 	}

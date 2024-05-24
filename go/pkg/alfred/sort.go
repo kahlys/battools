@@ -88,17 +88,17 @@ func stringsLess(a, b string) bool {
 	iRunes := []rune(a)
 	jRunes := []rune(b)
 
-	var min = len(iRunes)
+	min := len(iRunes)
 	if min > len(jRunes) {
 		min = len(jRunes)
 	}
 
 	for idx := 0; idx < min; idx++ {
-		var ir = iRunes[idx]
-		var jr = jRunes[idx]
+		ir := iRunes[idx]
+		jr := jRunes[idx]
 
-		var lir = unicode.ToLower(ir)
-		var ljr = unicode.ToLower(jr)
+		lir := unicode.ToLower(ir)
+		ljr := unicode.ToLower(jr)
 
 		if lir != ljr {
 			return lir < ljr

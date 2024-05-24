@@ -85,7 +85,7 @@ func (s *Server) handleConn(conn net.Conn) {
 	}
 
 	// write to dst what it reads from src
-	var pipe = func(src, dst net.Conn, filter func(b *[]byte)) {
+	pipe := func(src, dst net.Conn, filter func(b *[]byte)) {
 		defer func() {
 			conn.Close()
 			rconn.Close()
