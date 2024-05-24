@@ -63,6 +63,7 @@ go_library(
     visibility = ["//visibility:public"],
 )
 
+# gazelle:exclude hello.go
 # gazelle:exclude hello_bruce.go
 go_library(
     name = "codegen",
