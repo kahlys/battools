@@ -23,7 +23,7 @@ import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "proto/devtools/build/lib/packages/metrics/package_load_metrics.proto";
 import "proto/blaze/action_cache.proto";
-import "proto/blaze/invocation_policy.proto";
+import "proto/blaze/invocation_policy/invocation_policy.proto";
 import "proto/command_line/command_line.proto";
 import "proto/failure_details/failure_details.proto";
 
