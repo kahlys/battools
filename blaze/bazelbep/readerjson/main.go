@@ -12,9 +12,17 @@ import (
 
 	"github.com/jedib0t/go-pretty/text"
 	"github.com/tidwall/gjson"
+
+	bes "github.com/kahlys/battools/proto/build_event_stream"
 )
 
 func main() {
+	_ = bes.BuildEventId_TargetCompletedId{
+		Label: "label",
+	}
+
+	return
+
 	fileName := flag.String("file", "build_events.json", "build events file to read")
 	flag.Parse()
 

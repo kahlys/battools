@@ -67,10 +67,7 @@ go_library(
 # gazelle:exclude hello_bruce.go
 go_library(
     name = "codegen",
-    srcs = [
-        "hello.go",
-        "hello_world.go",
-    ],
+    srcs = ["hello_world.go"],
     importpath = "github.com/kahlys/battools/blaze/codegen",
     visibility = ["//visibility:public"],
 )

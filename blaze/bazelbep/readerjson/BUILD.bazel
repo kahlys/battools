@@ -6,6 +6,7 @@ go_library(
     importpath = "github.com/kahlys/battools/blaze/bazelbep/readerjson",
     visibility = ["//visibility:private"],
     deps = [
+        "//proto/build_event_stream:build_event_stream_go_proto",
         "@com_github_jedib0t_go_pretty//text",
         "@com_github_tidwall_gjson//:gjson",
     ],
