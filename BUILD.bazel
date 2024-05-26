@@ -2,6 +2,7 @@ load("@gazelle//:def.bzl", "gazelle")
 
 # gazelle:resolve go github.com/kahlys/battools/blaze/hello //blaze/codegen:go_hello
 # gazelle:resolve go github.com/kahlys/battools/blaze/codegen //blaze/codegen:go_hello
+# gazelle:resolve go github.com/kahlys/battools/blaze/proto/basic //proto/basic:basic_go_proto
 
 gazelle(
     name = "gazelle",
