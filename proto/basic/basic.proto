@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package basic;
+
+option go_package = "github.com/kahlys/battools/blaze/proto/basic;basic";
+
+message Hero {
+  string name = 1;
+  int32 age = 2;
+  Gender gender = 3;
+  repeated string abilities = 4;
+  map<string, string> attributes = 5;
+}
+
+enum Gender {
+  MALE = 0;
+  FEMALE = 1;
+  UNDEFINED = 2;
+}
