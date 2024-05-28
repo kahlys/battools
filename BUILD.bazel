@@ -1,3 +1,4 @@
+load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
 load("@gazelle//:def.bzl", "gazelle")
 
 # gazelle:resolve go github.com/kahlys/battools/blaze/hello //blaze/codegen:go_hello
@@ -7,4 +8,11 @@ load("@gazelle//:def.bzl", "gazelle")
 gazelle(
     name = "gazelle",
     mode = "fix",
+)
+
+write_source_files(
+    name = "update_go_pb",
+    additional_update_targets = [
+        "//proto/basic:basic_go_proto.update_go_pb",
+    ],
 )
