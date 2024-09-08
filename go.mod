@@ -4,6 +4,7 @@ go 1.22
 
 require (
 	github.com/getkin/kin-openapi v0.123.0
+	github.com/golang/mock v1.6.0
 	github.com/google/osv-scanner v1.7.1
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
 	github.com/lib/pq v1.10.9

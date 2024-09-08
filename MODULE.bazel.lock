@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 6,
-  "moduleFileHash": "88f535f1d7fbf30681780fe609f562ed893b64508d93b2c79e3b01b4c630c931",
+  "moduleFileHash": "0ab0d4b4a5d5668da625a6e56fb5aa927e4493974c5907de1e8c0f0b89398b88",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -65,6 +65,7 @@
           },
           "imports": {
             "com_github_getkin_kin_openapi": "com_github_getkin_kin_openapi",
+            "com_github_golang_mock": "com_github_golang_mock",
             "com_github_google_osv_scanner": "com_github_google_osv_scanner",
             "com_github_jedib0t_go_pretty": "com_github_jedib0t_go_pretty",
             "com_github_lib_pq": "com_github_lib_pq",
@@ -98,7 +99,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 24,
+            "line": 25,
             "column": 21
           },
           "imports": {
@@ -117,7 +118,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 25,
+                "line": 26,
                 "column": 15
               }
             }
@@ -131,7 +132,7 @@
           "usingModule": "<root>",
           "location": {
             "file": "@@//:MODULE.bazel",
-            "line": 33,
+            "line": 34,
             "column": 22
           },
           "imports": {
@@ -153,7 +154,7 @@
               "devDependency": false,
               "location": {
                 "file": "@@//:MODULE.bazel",
-                "line": 34,
+                "line": 35,
                 "column": 17
               }
             }
