@@ -87,9 +87,15 @@ rm -rf blaze/hello
 
 ## Gazelle tips
 
-### Multiple rules
+### GO import path resolve
 
-When you run `bazel run //:gazelle`, if you encounter an error about multiple rules, you can tell bazel to resolve the dependencies by adding a comment in the BUILD.bazel file.
+To tell gazelle which rule to use for a given import path, you can add a comment in the BUILD.bazel file.
+
+```starlark
+# gazelle:resolve go github.com/kahlys/battools/blaze/hello //blaze/codegen:go_hello
+```
+
+This can be useful when you have multiple rules that match the same import path. When you run `bazel run //:gazelle`, if you encounter an error about multiple rules, you can tell bazel to resolve the dependencies by adding a comment in the BUILD.bazel file.
 
 Take the following example:
 
