@@ -85,6 +85,37 @@ bazel mod tidy
 rm -rf blaze/hello
 ```
 
+### Find go_binary or go_library from dependency target
+
+To find the go_binary or go_library target from a dependency, you can use the following command:
+
+```bash
+bazel query 'kind(go_binary,@com_github_golang_mock//...)'
+bazel query 'kind(go_library,@com_github_lib_pq//...)'
+```
+
+Dependency target can be found in the MODULE.bazel file.
+
+```starlark
+...
+go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
+go_deps.from_file(go_mod = "//:go.mod")
+use_repo(
+    go_deps,
+    "com_github_getkin_kin_openapi",
+    "com_github_golang_mock",
+    "com_github_google_osv_scanner",
+    "com_github_jedib0t_go_pretty",
+    "com_github_lib_pq",
+    "com_github_mattn_go_sqlite3",
+    "com_github_spf13_cobra",
+    "com_github_stretchr_testify",
+    "com_github_tidwall_gjson",
+    "org_golang_x_text",
+)
+...
+```
+
 ## Gazelle tips
 
 ### GO import path resolve
