@@ -1,0 +1,25 @@
+load("@aspect_bazel_lib//lib:write_source_files.bzl", "write_source_files")
+load("@rules_go//extras:gomock.bzl", "gomock")
+load("@rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "gomock",
+    srcs = ["object.go"],
+    importpath = "github.com/kahlys/battools/blaze/gen_go_mock/gomock",
+    visibility = ["//visibility:public"],
+)
+
+gomock(
+    name = "gomock_mock",
+    out = "mock_test.go",
+    interfaces = ["MyObject"],
+    library = ":gomock",
+    package = "gomock",
+)
+
+write_source_files(
+    name = "write_gomock_mock",
+    files = {
+        "mock_test.go": ":gomock_mock",
+    },
+)
