@@ -6,7 +6,7 @@ go_library(
         "filter.go",
         "sort.go",
     ],
-    importpath = "github.com/kahlys/battools/go/pkg/alfred",
+    importpath = "github.com/kahlys/codex/go/pkg/alfred",
     visibility = ["//visibility:public"],
     deps = ["@com_github_lib_pq//:pq"],
 )

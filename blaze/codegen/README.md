@@ -15,7 +15,7 @@ load("@rules_go//go:def.bzl", "go_binary", "go_library")
 go_library(
     name = "codegen_lib",
     srcs = ["main.go"],
-    importpath = "github.com/kahlys/battools/blaze/codegen",
+    importpath = "github.com/kahlys/codex/blaze/codegen",
     visibility = ["//visibility:private"],
 )
 
@@ -191,7 +191,7 @@ To use the generated code, add the following to the BUILD.bazel file:
 go_library(
     name = "go_hello",
     srcs = [":gensea"],
-    importpath = "github.com/kahlys/battools/blaze/hello",
+    importpath = "github.com/kahlys/codex/blaze/hello",
     visibility = ["//visibility:public"],
 )
 ```
@@ -204,7 +204,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/kahlys/battools/blaze/hello"
+	"github.com/kahlys/codex/blaze/hello"
 )
 
 func main() {
@@ -218,7 +218,7 @@ In the BUILD.bazel file of the `cmd` directory, add _deps_ to the go_library rul
 go_library(
     name = "cmd_lib",
     srcs = ["main.go"],
-    importpath = "github.com/kahlys/battools/blaze/codegen/cmd",
+    importpath = "github.com/kahlys/codex/blaze/codegen/cmd",
     visibility = ["//visibility:private"],
     deps = [
         "//blaze/codegen:go_hello",  # keep

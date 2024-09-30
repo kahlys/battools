@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/kahlys/battools/go/cmd/oracle/internal/tools/webstealer"
+	"github.com/kahlys/codex/go/cmd/oracle/internal/tools/webstealer"
 )
 
 func main() {
