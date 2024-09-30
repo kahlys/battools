@@ -7,6 +7,6 @@ go_library(
         "win.go",
         "win_no.go",
     ],
-    importpath = "github.com/kahlys/battools/go/cmd/oracle/internal/cryptox",
+    importpath = "github.com/kahlys/codex/go/cmd/oracle/internal/cryptox",
     visibility = ["//go/cmd/oracle:__subpackages__"],
 )

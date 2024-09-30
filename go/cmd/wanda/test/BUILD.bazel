@@ -3,7 +3,7 @@ load("@rules_go//go:def.bzl", "go_binary", "go_library")
 go_library(
     name = "test_lib",
     srcs = ["main.go"],
-    importpath = "github.com/kahlys/battools/go/cmd/wanda/test",
+    importpath = "github.com/kahlys/codex/go/cmd/wanda/test",
     visibility = ["//visibility:private"],
 )
 

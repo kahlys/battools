@@ -6,7 +6,7 @@ go_library(
         "test.go",
         "test2.go",
     ],
-    importpath = "github.com/kahlys/battools/go/cmd/geninter/testpkg",
+    importpath = "github.com/kahlys/codex/go/cmd/geninter/testpkg",
     visibility = ["//visibility:public"],
 )
 

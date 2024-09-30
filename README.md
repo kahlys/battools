@@ -1,4 +1,4 @@
-# battools
+# codex
 
 personnal tools
 
@@ -92,7 +92,7 @@ rm -rf blaze/hello
 To tell gazelle which rule to use for a given import path, you can add a comment in the BUILD.bazel file.
 
 ```starlark
-# gazelle:resolve go github.com/kahlys/battools/blaze/hello //blaze/codegen:go_hello
+# gazelle:resolve go github.com/kahlys/codex/blaze/hello //blaze/codegen:go_hello
 ```
 
 This can be useful when you have multiple rules that match the same import path. When you run `bazel run //:gazelle`, if you encounter an error about multiple rules, you can tell bazel to resolve the dependencies by adding a comment in the BUILD.bazel file.
@@ -100,11 +100,11 @@ This can be useful when you have multiple rules that match the same import path.
 Take the following example:
 
 ```bash
-gazelle: rule //blaze/codegen/cmd:cmd_lib imports "github.com/kahlys/battools/blaze/hello" which matches multiple rules: //blaze/codegen:go_hello and //blaze/codegen:go_hello_sea. # gazelle:resolve may be used to disambiguate
+gazelle: rule //blaze/codegen/cmd:cmd_lib imports "github.com/kahlys/codex/blaze/hello" which matches multiple rules: //blaze/codegen:go_hello and //blaze/codegen:go_hello_sea. # gazelle:resolve may be used to disambiguate
 ```
 
 In the root BUILD.bazel file, add the following line to resolve the go dependencies.
 
 ```starlark
-# gazelle:resolve go github.com/kahlys/battools/blaze/hello //blaze/codegen:go_hello
+# gazelle:resolve go github.com/kahlys/codex/blaze/hello //blaze/codegen:go_hello
 ```

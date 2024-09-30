@@ -1,4 +1,4 @@
-module github.com/kahlys/battools
+module github.com/kahlys/codex
 
 go 1.22
 
